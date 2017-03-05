@@ -2,8 +2,10 @@ package com.thd.comicviet;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     ComicListRvAdapter adapter;
     LoadComic loadComic;
     Intent intent;
+    AlertDialog.Builder alertDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,18 @@ public class MainActivity extends AppCompatActivity {
         loadComic = new LoadComic(this);
 
         String url = "http://vietcomic.net/truyen-tranh-hay?type=truyenmoi&page=1";
+        if(!isOnline()) {
+            alertDialog = new AlertDialog.Builder(MainActivity.this);
+            alertDialog.setTitle("Internet Conection !");
+            alertDialog.setMessage("No internet conection !");
+            alertDialog.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            alertDialog.show();
+        }
         loadComic.execute(url);
     }
 
@@ -102,6 +117,17 @@ public class MainActivity extends AppCompatActivity {
             });
             dialog.dismiss();
         }
+    }
+    public boolean isOnline() {
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+            int     exitValue = ipProcess.waitFor();
+            return (exitValue == 0);
+        }
+        catch (IOException | InterruptedException e)          { e.printStackTrace(); }
+
+        return false;
     }
 
 }
