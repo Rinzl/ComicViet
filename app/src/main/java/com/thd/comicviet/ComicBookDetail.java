@@ -12,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.thd.adapter.ChapterAdapter;
 import com.thd.model.BookDetail;
@@ -117,8 +119,10 @@ public class ComicBookDetail extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Chapter chapter = bookDetail.getChapterList().get(i);
+                    Toast.makeText(context,bookDetail.getChapterList().get(i).getChapterName(),Toast.LENGTH_LONG).show();
                     intent = new Intent(ComicBookDetail.this,ReadingZone.class);
                     intent.putExtra("img",chapter.getChapterUrl());
+                    startActivity(intent);
                 }
             });
         }

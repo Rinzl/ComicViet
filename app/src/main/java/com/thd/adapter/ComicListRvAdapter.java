@@ -51,7 +51,7 @@ public class ComicListRvAdapter extends RecyclerView.Adapter<ComicListRvAdapter.
         Glide.with(context)
                 .load(comicBook.getBookImageUrl())
                 .thumbnail(0.2f)
-                .fitCenter()
+                .centerCrop()
                 .crossFade()
                 .into(holder.bookCover);
     }
