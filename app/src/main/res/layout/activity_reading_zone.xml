@@ -19,9 +19,9 @@
         android:dropDownWidth="match_parent"
         android:layout_height="30dp" />
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvImagePage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/lvComicPage" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

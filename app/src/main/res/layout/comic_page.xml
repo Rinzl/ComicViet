@@ -5,8 +5,9 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/ivComicPage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/demo"
-        android:id="@+id/ivComicPage" />
+        android:layout_height="160dp"
+        android:cropToPadding="false"
+        app:srcCompat="@drawable/demo" />
 </LinearLayout>
